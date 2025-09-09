@@ -1,5 +1,12 @@
-const num1 = 12
-const num2 = 7
+
+// let name1 = "John";
+
+// let name2 = name1
+// // console.log(name2);
+
+// name2 = "Doe"
+// console.log(name1); //-----
+// console.log(name2);//-----
 
 
 
@@ -7,28 +14,71 @@ const num2 = 7
 
 
 
+// const person2 = person1
+
+// console.log(person1);
+// console.log(person2);
+
+// person2.name = "Doe"
+
+// console.log(person1);
+// console.log(person2);
+
+
+// const fruits = ["Apple", "Mango", "Banana"];
+
+// const fruits2 = {
+//     0: "Apple",
+//     1: "Mango",
+//     2: "Banana"
+// };
+
+// const fruits2 = fruits
+
+// fruits2[0] = "Orange"
+
+// console.log(fruits);
+
+
+const person1 = {
+    name: "John",
+    age: 22,
+    hobbies: {
+        hobby1: "Coding",
+        hobby2: "Traveling"
+    }
+}
+
+const person2 = {...person1, date: Date("2024-06-10")}
+
+
+console.log(person1);
+console.log(person2);
+
+
+// person2.name = "Doe"
+
+// person2.hobbies.hobby1 = "Reading"
+
+// console.log(person1);
+// console.log(person2);
 
 
 
 
 
+// let toString = JSON.stringify(person1)
+// console.log(toString);
+
+// let toJason = JSON.parse(toString)
+
+// console.log(toJason);
 
 
+// toJason.hobbies.hobby1 = "Coding"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// console.log("to Jason",toJason);
+// console.log("person 1",person1);
 
 
 
