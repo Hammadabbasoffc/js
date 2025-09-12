@@ -1,0 +1,35 @@
+/* Default light theme */
+html {
+  background-color: white;
+  color: black;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+  height: 100%;
+  padding: 20px;
+}
+
+/* Dark theme */
+html.dark {
+  background-color: #121212;
+  color: white;
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+html.light button {
+  background: black;
+  color: white;
+}
+
+html.dark button {
+  background: white;
+  color: black;
+}
