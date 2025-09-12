@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Student Input Example</title>
+  <title>Save Inputs with LocalStorage</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Save Student Info</h2>
-  
-  <label for="studentName">Enter your name:</label>
-  <input type="text" id="studentName" placeholder="Type your name">
+  <h2>Student Input Storage</h2>
+
+  <input type="text" id="userInput" placeholder="Enter something">
   <button id="saveBtn">Save</button>
-  
-  <h3>Stored Student:</h3>
-  <p id="display"></p>
+
+  <h3>All Stored Inputs:</h3>
+  <ul id="inputList"></ul>
 
   <script src="script.js"></script>
 </body>
