@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>TaskBoard Pro - Enhanced Kanban</title>
+  </head>
+  <body class="bg-slate-50 min-h-screen">
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="mb-8">
+        <h2 class="text-3xl font-bold text-slate-900 mb-2" style="font-family: 'Space Grotesk', sans-serif;">Project Dashboard</h2>
+        <p class="text-slate-600 text-lg">Organize your tasks and boost productivity with style</p>
+      </div>
+
+      <div class="board grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
+        <div class="column bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-2xl" id="todo">
+          <div class="column-header p-6 text-white bg-gradient-to-r from-blue-600 to-blue-700">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold flex items-center" style="font-family: 'Space Grotesk', sans-serif;">
+                <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                  </svg>
+                </div>
+                To Do
+              </h3>
+              <span class="bg-white/20 text-sm px-3 py-1 rounded-full font-medium" id="todo-count">0</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="tasks space-y-4 min-h-[300px]" id="todo-tasks"></div>
+            <div class="mt-6 space-y-3">
+              <input type="text" id="todo-input" class="task-input w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-slate-500 text-sm transition-all duration-200 text-slate-900" placeholder="Add a new task..." />
+              <button class="add-task w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center shadow-md hover:shadow-lg" id="todo-add">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-2xl" id="doing">
+          <div class="column-header p-6 text-white bg-gradient-to-r from-amber-500 to-orange-600">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold flex items-center" style="font-family: 'Space Grotesk', sans-serif;">
+                <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                In Progress
+              </h3>
+              <span class="bg-white/20 text-sm px-3 py-1 rounded-full font-medium" id="doing-count">0</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="tasks space-y-4 min-h-[300px]" id="doing-tasks"></div>
+            <div class="mt-6 space-y-3">
+              <input type="text" id="doing-input" class="task-input w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-slate-500 text-sm transition-all duration-200 text-slate-900" placeholder="Add a new task..." />
+              <button class="add-task w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center shadow-md hover:shadow-lg" id="doing-add">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-2xl" id="done">
+          <div class="column-header p-6 text-white bg-gradient-to-r from-emerald-500 to-green-600">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold flex items-center" style="font-family: 'Space Grotesk', sans-serif;">
+                <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                Done
+              </h3>
+              <span class="bg-white/20 text-sm px-3 py-1 rounded-full font-medium" id="done-count">0</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="tasks space-y-4 min-h-[300px]" id="done-tasks"></div>
+            <div class="mt-6 space-y-3">
+              <input type="text" id="done-input" class="task-input w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-slate-500 text-sm transition-all duration-200 text-slate-900" placeholder="Add a new task..." />
+              <button class="add-task w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center shadow-md hover:shadow-lg" id="done-add">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./src/main.js"></script>
+  </body>
+</html>

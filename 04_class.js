@@ -1,19 +1,84 @@
-const obj1 ={
-    fname: "John",
-    lname: "Doe",
+const person1 = {
+    name: "John",
     age: 30,
     getFullName: function(){
-        return `${this.fname} ${this.lname}`
+        return `${this.name} ${this.age}`
     }
 }
 
-obj2 = {
-    
+const person2 = {}
+
+person2.__proto__ = person1
+
+console.log(person2.getFullName());
+
+
+class personcl1 {
+    constructor(name, age){
+        this.name = name;
+        this.age = age;
+    }
+    getFullName(){
+        return `${this.name} ${this.age}`
+    }
 }
 
-obj2.__proto__ = obj1
+class personcl2 extends personcl1 {}
 
-console.log(obj2.getFullName());
+
+const p1 =new personcl2("Jhon", "Doe");
+
+console.log(p1.getFullName());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const obj1 ={
+//     fname: "John",
+//     lname: "Doe",
+//     age: 30,
+//     getFullName: function(){
+//         return `${this.fname} ${this.lname}`
+//     }
+// }
+
+// obj2 = {
+    
+// }
+
+// obj2.__proto__ = obj1
+
+// console.log(obj2.getFullName());
 
 // class Person1 {
 //   constructor(fanme, lanme) {
