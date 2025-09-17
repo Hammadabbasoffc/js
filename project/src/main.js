@@ -101,4 +101,52 @@ class project {
 
     return taskDiv;
   }
+
+  setupDragAndDrop() {
+    ["todo", "doing", "done"].forEach((column) => {
+      const container = document.getElementById(`${column}-tasks`);
+
+      container.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        container.classList.add("drag-over");
+      });
+
+      container.addEventListener("dragleave", (e) => {
+        console.log("dragleave");
+        if (!container.contains(e.relatedTarget)) {
+          container.classList.remove("drag-over");
+        }
+      });
+
+      container.addEventListener("drop", (e) => {
+        console.log("drop");
+        e.preventDefault();
+        container.classList.remove("drag-over");
+        this.handleDrop(e, column);
+      });
+    });
+
+    document.addEventListener("dragstart", (e) => {
+      console.log("dragstart");
+      if (e.target.classList.contains("task")) {
+        this.draggedTask = {
+          id: Number.parseInt(e.target.dataset.taskId),
+          column: e.target.dataset.column,
+        };
+        e.target.classList.add("dragging");
+      }
+    });
+
+    document.addEventListener("dragend", (e) => {
+      console.log("dragend");
+      if (e.target.classList.contains("task")) {
+        e.target.classList.remove("dragging");
+        this.draggedTask = null;
+      }
+    });
+  }
 }
+
+// const kanban = new project();
+
+// window.kanban = kanban;
