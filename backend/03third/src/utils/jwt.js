@@ -4,8 +4,16 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const storeCookies = (res, payload) => {
+
+
     const isProduction = process.env.NODE_ENV === 'production'
-    const token = jwt.sign(payload, process.env.JWT_SECRET, '1d')
+    console.log(process.env.JWT_SECRET);
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
+    console.log(token);
+
+    console.log("I am here to check  cookies");
+
     res.cookie("jwt", token, {
         httpOnly: true,
         secure: isProduction,

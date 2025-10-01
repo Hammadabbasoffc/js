@@ -4,7 +4,11 @@ import storeCookies from "../utils/jwt.js"
 import crypto from "crypto"
 import nodemailer from "nodemailer"
 const registerUser = async (req, res) => {
+    console.log(req.body);
+
     const { name, email, password, role } = req.body
+
+
     if (!name || !email || !password) {
         return res.status(400).json({
             success: false,
@@ -95,6 +99,13 @@ const login = async (req, res) => {
             })
         }
 
+        if (user.isVerified === false) {
+            return res.status(400).json({
+                success: false,
+                message: "Please verify your email to login"
+            })
+        }
+
         const isMatched = bcrypt.compare(password, user.password)
         if (!isMatched) {
             return res.status(400).json({
@@ -107,6 +118,8 @@ const login = async (req, res) => {
             userId: user._id,
             role: user.role
         }
+
+        console.log("I am here to check ");
 
 
 
@@ -128,4 +141,66 @@ const login = async (req, res) => {
     }
 }
 
-export { registerUser, login }
+const logout = (req, res) => {
+    try {
+        // Clear the token cookie
+        res.clearCookie("jwt", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+            maxAge: 24 * 60 * 60 * 1000
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Logged out successfully",
+        });
+    } catch (error) {
+        console.error("Logout error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error during logout",
+        });
+    }
+}
+
+const verifyUser = async (req, res) => {
+    const { token } = req.params
+    if (!token) {
+        return res.status(400).json({
+            success: false,
+            message: "Token is required"
+        })
+    }
+    try {
+
+        const user = await User.findOne({ verificationToken: token })
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid token"
+            })
+        }
+
+        user.isVerified = true
+        user.verificationToken = null
+        await user.save()
+        return res.status(200).json({
+            success: true,
+            message: "User verified successfully"
+        })
+
+
+
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+
+    }
+
+}
+
+export { registerUser, login, logout, verifyUser }

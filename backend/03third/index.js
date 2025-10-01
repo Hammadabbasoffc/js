@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser";
 import connectDB from "./src/utils/connectDB.js"
+import userRouter from "./src/routes/user.route.js"
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use('/api/v1/users', userRouter)
 
 
 app.listen(PORT, () => {
