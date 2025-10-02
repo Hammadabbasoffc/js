@@ -142,6 +142,9 @@ const login = async (req, res) => {
 }
 
 const logout = (req, res) => {
+
+    console.log("Logout route accessed", req);
+
     try {
         // Clear the token cookie
         res.clearCookie("jwt", {
@@ -203,4 +206,39 @@ const verifyUser = async (req, res) => {
 
 }
 
-export { registerUser, login, logout, verifyUser }
+const getMe = async (req, res) => {
+    console.log(req);
+
+    const userId = req.user.userId
+    if (!userId) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized , please login"
+        })
+    }
+    try {
+        const user = await User.findById(userId).select("-password -verificationToken -createdAt -updatedAt -passwordResetToken -passwordResetExpires -__v")
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            user
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+const forgotPassword = async (req, res) => { }
+
+const resetPassword = async (req, res) => { }
+
+export { registerUser, login, logout, verifyUser, getMe }
