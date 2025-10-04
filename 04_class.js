@@ -6,29 +6,36 @@ const person1 = {
     }
 }
 
-const person2 = {}
+const person2 = {
+    getFullName: function(){
+        return "hello"
+    }
+}
 
 person2.__proto__ = person1
 
 console.log(person2.getFullName());
 
-
-class personcl1 {
-    constructor(name, age){
-        this.name = name;
-        this.age = age;
-    }
-    getFullName(){
-        return `${this.name} ${this.age}`
-    }
-}
-
-class personcl2 extends personcl1 {}
+console.log(person2.__proto__ );
 
 
-const p1 =new personcl2("Jhon", "Doe");
 
-console.log(p1.getFullName());
+// class personcl1 {
+//     constructor(name, age){
+//         this.name = name;
+//         this.age = age;
+//     }
+//     getFullName(){
+//         return `${this.name} ${this.age}`
+//     }
+// }
+
+// class personcl2 extends personcl1 {}
+
+
+// const p1 =new personcl2("Jhon", "Doe");
+
+// console.log(p1.getFullName());
 
 
 
